@@ -1,0 +1,22 @@
+. link:README.adoc[Overview]
+
+. link:apps/README.adoc[Apps]
+.. link:apps/get-list.adoc[List apps]
+.. link:apps/get-list_branches.adoc[List branches]
+
+. link:builds/README.adoc[Builds]
+.. link:builds/get-list.adoc[List builds]
+.. link:builds/get-build.adoc[Show a build]
+.. link:builds/get-latest_build.adoc[Show the latest build]
+.. link:builds/get-test_results.adoc[Show test results]
+.. link:builds/get-coverage.adoc[Show build coverage]
+.. link:builds/post-trigger.adoc[Trigger a build]
+.. link:builds/post-cancel.adoc[Cancel a build]
+
+. link:deployment_groups/README.adoc[Deployment Groups]
+.. link:deployment_groups/get-list.adoc[List deployment groups]
+.. link:deployment_groups/put-add_testers.adoc[Add testers]
+.. link:deployment_groups/delete-testers.adoc[Remove testers]
+
+. link:misc/README.adoc[Miscellaneous]
+.. link:misc/get-ip_ranges.adoc[List buddybuild IP address ranges]

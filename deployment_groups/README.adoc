@@ -1,0 +1,10 @@
+= Deployment Groups
+
+This section covers the API methods for retrieving information about
+deployment groups, including adding and removing testers:
+
+- link:get-list.adoc[List deployment groups]
+
+- link:put-add_testers.adoc[Add testers]
+
+- link:delete-testers.adoc[Remove testers]

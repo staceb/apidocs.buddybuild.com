@@ -1,0 +1,8 @@
+= Apps
+
+This section covers the API methods for retrieving information about
+applications:
+
+- link:get-list.adoc[List apps]
+
+- link:get-list_branches.adoc[List branches]

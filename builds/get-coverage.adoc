@@ -1,0 +1,137 @@
+= Show code coverage
+:linkattrs:
+
+[#endpoint]
+----
+{
+  "base":     "\https://api.buddybuild.com/v1",
+  "endpoint": "/builds/:build_id:/coverage",
+  "method":   "get",
+  "params": {
+    "headers": [
+      {
+        "name": "Authorization",
+        "type": "Bearer :api-access-token:",
+        "req":  true,
+        "cue":  "Enter your API access token"
+      }
+    ],
+    "path":   [
+      {
+        "name": ":build_id:",
+        "type": "string",
+        "desc": 'Build identifier',
+        "req":  true,
+        "cue":  'Enter a build id'
+      }
+    ],
+    "query":  [
+      {
+        "name": "showFileCoverage",
+        "type": "boolean",
+        "desc": "Show code coverage for each file",
+        "def":  "false",
+        "req":  false,
+        "cue":  'Enter "true" to show code coverage for each file'
+      },
+      {
+        "name": "showFunctionCoverage",
+        "type": "boolean",
+        "desc": "Show code coverage for each function",
+        "def":  "false",
+        "req":  false,
+        "cue":  'Enter "true" to show code coerage for each function'
+      }
+    ],
+    "body":   []
+  },
+  "authentication": "required"
+}
+----
+
+== Definition
+
+[.definition.placeholder]
+Placeholder for the definition; auto-generated from JSON above.
+
+Use this method to show code coverage for a build with a specified
+`build_id`.
+
+Code coverage for each target is reported separately. The top-level code
+coverage is the average of each target's code coverage.
+
+Add the query parameter `showFileCoverage=true` to list code coverage
+for each file in the response.
+
+Add the query parameter `showFunctionCoverage=true` to list code
+coverage for each function in the response. This parameter implies
+`showFileCoverage=true`.
+
+[NOTE]
+======
+**Looking for your API access token?**
+
+Read more about link:../README.adoc#authentication[authenticating with
+buddybuild] or show
+link:https://dashboard.buddybuild.com/account/access-token[your personal
+access token^].
+======
+
+{% method %}
+
+== Parameters
+
+Required = [req]`*`
+
+[.parameters.placeholder]
+Placeholder for the endpoint parameters; auto-generated from JSON above.
+
+{% sample lang="curl" %}
+
+[role=copyme]
+.curl
+[source,bash]
+curl -X GET \
+  -H 'Authorization: Bearer :api-access-token:' \
+  '\https://api.buddybuild.com/v1/builds/:build_id:/coverage?showFileCoverage=true&showFunctionCoverage=true'
+
+{% sample lang="jquery" %}
+
+[role=copyme]
+.jquery
+[source,js]
+----
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "\https://api.buddybuild.com/v1/builds/:build_id:/coverage?showFileCoverage=true&showFunctionCoverage=true",
+  "method": "GET",
+  "headers": {
+    "authorization": "Bearer :api-access-token:"
+  }
+}
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+----
+
+{% common %}
+
+.Response
+[source,json]
+{
+  "coverage": 0.75,
+  "build_id": "58b899061baced0100616172",
+  "targets": [
+    {
+      "name": "MyApp.app",
+      "coverage": 0.70
+    },
+    {
+      "name": "Networking.framework",
+      "coverage": 0.80
+    }
+  ]
+}
+
+{% endmethod %}

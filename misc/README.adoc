@@ -1,0 +1,5 @@
+= Miscellaneous
+
+This section covers miscellaneous information retrieval methods:
+
+- link:get-ip_ranges.adoc[List buddybuild IP address ranges]

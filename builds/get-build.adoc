@@ -1,0 +1,143 @@
+= Show a build
+:linkattrs:
+
+[#endpoint]
+----
+{
+  "base":     "\https://api.buddybuild.com/v1",
+  "endpoint": "/builds/:build_id:",
+  "method":   "get",
+  "params": {
+    "headers": [
+      {
+        "name": "Authorization",
+        "type": "Bearer :api-access-token:",
+        "req":  true,
+        "cue":  "Enter your API access token"
+      }
+    ],
+    "path":   [
+      {
+        "name": ":build_id:",
+        "type": "string",
+        "desc": 'Build identifier',
+        "req":  true,
+        "cue":  'Enter a build id'
+      }
+    ],
+    "query":  [],
+    "body":   []
+  },
+  "authentication": "required"
+}
+----
+
+== Definition
+
+[.definition.placeholder]
+Placeholder for the definition; auto-generated from JSON above.
+
+Use this method to show a build with a specified `build_id`.
+
+You can use this method together with the
+link:post-trigger.adoc[Trigger a build] API, which returns a
+`build_id` in the response.
+
+See also:
+
+* link:get-test_results.adoc[Show test results] 
+
+* link:get-coverage.adoc[Show code coverage]
+
+[NOTE]
+======
+**Looking for your API access token?**
+
+Read more about link:../README.adoc#authentication[authenticating with
+buddybuild] or show
+link:https://dashboard.buddybuild.com/account/access-token[your personal
+access token^].
+======
+
+{% method %}
+
+== Parameters
+
+Required = [req]`*`
+
+[.parameters.placeholder]
+Placeholder for the endpoint parameters; auto-generated from JSON above.
+
+{% sample lang="curl" %}
+
+[role=copyme]
+.curl
+[source,bash]
+curl -X GET \
+  -H 'Authorization: Bearer :api-access-token:' \
+  '\https://api.buddybuild.com/v1/builds/:build_id:'
+
+{% sample lang="jquery" %}
+
+[role=copyme]
+.jquery
+[source,js]
+----
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "\https://api.buddybuild.com/v1/builds/:build_id:",
+  "method": "GET",
+  "headers": {
+    "authorization": "Bearer :api-access-token:"
+  }
+}
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+----
+
+{% common %}
+
+.Response
+[source,json]
+{
+  "_id": "58b899061baced0100616172",
+  "app_id": "58b897fb1baced010061616e",
+  "repo_url": "\git@github.com:myorg/2048.git",
+  "build_status": "failed",
+  "finished": true,
+  "commit_info": {
+    "tags": [],
+    "branch": "master",
+    "commit_sha": "54a9faeccc0979aaa16f3226562a24fb3330e9f0",
+    "author": "David Pie",
+    "message": "Add new crash type",
+    "html_url": "\https://github.com/myorg/2048/commit/54a9faeccc0979aaa16f3226562a24fb3330e9f0"
+  },
+  "build_number": 2,
+  "created_at": "2017-03-02T22:13:26.728Z",
+  "started_at": "2017-03-02T22:15:11.381Z",
+  "finished_at": "2017-03-02T22:20:06.432Z",
+  "test_summary": {
+    "tests_count": 10,
+    "tests_passed": 9,
+    "code_coverage_percentage": 0.6878079796534735
+  },
+  "links": {
+    "download": [
+      {
+        "name": "m2048 - Release",
+        "url": "\https://dashboard.buddybuild.com/api/download/download-ipa?buildID=58b899061baced0100616172"
+      }
+    ],
+    "install": [
+      {
+        "name": "m2048 - Release",
+        "url": "\https://dashboard.buddybuild.com/download/ios?buildID=58b899061baced0100616172"
+      }
+    ]
+  }
+}
+
+{% endmethod %}

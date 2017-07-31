@@ -1,0 +1,30 @@
+{
+  "description": "buddybuild API Documentation",
+  "author": "The buddybuild team",
+  "language": "en",
+  "styles": {
+    "website": "_css/website.css"
+  },
+  "plugins": [
+    "-sharing",
+    "search@2.2.1",
+    "explicit-url@0.0.3",
+    "theme-api@git+https://github.com/BuddyBuild/theme-api.git"
+  ],
+  "pluginsConfig": {
+    "theme-api": {
+      "languages": [
+        {
+          "lang": "js",
+          "name": "JavaScript",
+          "default": true
+        },
+        {
+          "lang": "go",
+          "name": "Go"
+        }
+      ],
+      "split": true
+    }
+  }
+}

@@ -1,0 +1,154 @@
+= List builds
+:linkattrs:
+
+[#endpoint]
+----
+{
+  "base":     "\https://api.buddybuild.com/v1",
+  "endpoint": "/apps/:app_id:/builds",
+  "method":   "get",
+  "params": {
+    "headers": [
+      {
+        "name": "Authorization",
+        "type": "Bearer :api-access-token:",
+        "req":  true,
+        "cue":  "Enter your API access token"
+      }
+    ],
+    "path":   [
+      {
+        "name": ":app_id:",
+        "type": "string",
+        "desc": 'App identifier',
+        "req":  true,
+        "cue":  'Enter an app id'
+      }
+    ],
+    "query":  [
+      {
+        "name": "branch",
+        "type": "string",
+        "desc": "URL-encoded name of the branch",
+        "req":  false,
+        "cue":  "Enter a branch name"
+      },
+      {
+        "name": "scheme",
+        "type": "string",
+        "desc": "URL-encoded name of the scheme (iOS only)",
+        "req":  false,
+        "cue":  "Enter a scheme name"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "desc": 'One of "cancelled", "failed", "queued", "running", "success"',
+        "req":  false,
+        "cue":  'Enter a status, one of "cancelled", "failed", "queued", "running", "success"'
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "desc":   "Number of builds to list: min=1, max=100",
+        "def":  "5",
+        "req":  false,
+        "cue":  "Enter the number of builds to list"
+      }
+    ],
+    "body":   []
+  },
+  "authentication": "required"
+}
+----
+
+== Definition
+
+[.definition.placeholder]
+Placeholder for the definition; auto-generated from JSON above.
+
+Use this method to list the most recent builds for the specified app.
+The number of results are limited to the 5 most recent builds by
+default, but you can request up to 100 builds using the `limit` query
+parameter.
+
+You can apply optional filters to the query:
+
+* Specify a branch name (`branch`) to restrict the output to the most
+  recent builds for the specified branch. The branch name must be URL
+  encoded.
+
+* Specify a build status (`status`) to restrict the output to the most
+  recent builds for the specified build status. Valid values are
+  `cancelled`, `failed`, `queued`, `running`, or `success`. Use this to
+  get a list of recently failed builds for example.
+
+For iOS apps, you can also apply the optional scheme filter to the
+query:
+
+* Each build of a multi-scheme build is returned separately. Specify an
+  iOS scheme name (`scheme`) to restrict the output to the most recent
+  builds for the specified scheme. The scheme name must be URL encoded.
+
+[NOTE]
+======
+**Looking for your API access token?**
+
+Read more about link:../README.adoc#authentication[authenticating with
+buddybuild] or show
+link:https://dashboard.buddybuild.com/account/access-token[your personal
+access token^].
+======
+
+{% method %}
+
+== Parameters
+
+Required = [req]`*`
+
+[.parameters.placeholder]
+Placeholder for the endpoint parameters; auto-generated from JSON above.
+
+{% sample lang="curl" %}
+
+[role=copyme]
+.curl
+[source,bash]
+curl -X GET \
+  -H 'Authorization: Bearer :api-access_token:' \
+  '\https://api.buddybuild.com/v1/apps/:app_id:/builds?branch=:branch:&scheme=:scheme:&status=:status:&limit=:limit:'
+
+{% sample lang="jquery" %}
+
+[role=copyme]
+.jquery
+[source,js]
+----
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "\https:////api.buddybuild.com/v1/apps/:app_id:/builds?limit=&branch=:branch:&scheme=:scheme:&status=:status:",
+  "method": "GET",
+  "headers": {
+    "authorization": "Bearer :api-access-token:"
+  }
+}
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+----
+
+{% common %}
+
+.Response
+[source,json]
+[
+  {
+    "name": "master"
+  },
+  {
+    "name": "release"
+  }
+]
+
+{% endmethod %}

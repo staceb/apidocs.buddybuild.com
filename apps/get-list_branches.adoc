@@ -1,0 +1,116 @@
+= List branches
+:linkattrs:
+
+[#endpoint]
+----
+{
+  "base":     "\https://api.buddybuild.com/v1",
+  "endpoint": "/apps/:app_id:/branches",
+  "method":   "get",
+  "params": {
+    "headers": [
+      {
+        "name": "Authorization",
+        "type": "Bearer :api-access-token:",
+        "req":  true,
+        "cue":  "Enter your API access token"
+      }
+    ],
+    "path":   [
+      {
+        "name": ":app_id:",
+        "type": "string",
+        "desc": 'App identifier',
+        "req":  true,
+        "cue":  'Enter an app id'
+      }
+    ],
+    "query":  [
+      {
+        "name": "includeDeleted",
+        "type": "boolean",
+        "desc": 'Set to "true" to include deleted branches',
+        "req":  false,
+        "cue":  'Enter "true" to include deleted branches'
+      }
+    ],
+    "body":   []
+  },
+  "authentication": "required"
+}
+----
+
+== Definition
+
+[.definition.placeholder]
+Placeholder for the definition; auto-generated from JSON above.
+
+Use this method to retrieve a list of branches associated with the
+specified `app_id`.
+
+Deleted branches are not included in the response by default. To include
+deleted branches in the response set the `includeDeleted` query
+parameter to `true`.
+
+[NOTE]
+======
+**Looking for your API access token?**
+
+Read more about link:../README.adoc#authentication[authenticating with
+buddybuild] or show
+link:https://dashboard.buddybuild.com/account/access-token[your personal
+access token^].
+======
+
+{% method %}
+
+== Parameters
+
+Required = [req]`*`
+
+[.parameters.placeholder]
+Placeholder for the endpoint parameters; auto-generated from JSON above.
+
+{% sample lang="curl" %}
+
+[role=copyme]
+.curl
+[source,bash]
+curl -X GET \
+  -H 'Authorization: Bearer :api-access-token:' \
+  '\https://api.buddybuild.com/v1/apps/:app_id:/branches'
+
+{% sample lang="jquery" %}
+
+[role=copyme]
+.jquery
+[source,js]
+----
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "\https://api.buddybuild.com/v1/apps/:app_id:/branches?includeDeleted=true",
+  "method": "GET",
+  "headers": {
+    "authorization": "Bearer :api-access-token:"
+  }
+}
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+----
+
+{% common %}
+
+.Response
+[source,json]
+[
+  {
+    "name": "master"
+  },
+  {
+    "name": "release"
+  }
+]
+
+{% endmethod %}

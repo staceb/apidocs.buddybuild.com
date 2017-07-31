@@ -1,0 +1,134 @@
+= Show test results
+:linkattrs:
+
+[#endpoint]
+----
+{
+  "base":     "\https://api.buddybuild.com/v1",
+  "endpoint": "/builds/:build_id:/tests",
+  "method":   "get",
+  "params": {
+    "headers": [
+      {
+        "name": "Authorization",
+        "type": "Bearer :api-access-token:",
+        "req":  true,
+        "cue":  "Enter your API access token"
+      }
+    ],
+    "path":   [
+      {
+        "name": ":build_id:",
+        "type": "string",
+        "desc": 'Build identifier',
+        "req":  true,
+        "cue":  'Enter a build id'
+      }
+    ],
+    "query":  [
+      {
+        "name": "showFailed",
+        "type": "string",
+        "desc": "Show failed tests",
+        "def":  false,
+        "req":  false,
+        "cue":  'Enter "true" to include failed tests'
+      },
+      {
+        "name": "showPassing",
+        "type": "boolean",
+        "desc": "Show passing tests",
+        "def":  false,
+        "req":  false,
+        "cue":  'Enter "true" to include passing tests'
+      }
+    ],
+    "body":   []
+  },
+  "authentication": "required"
+}
+----
+
+== Definition
+
+[.definition.placeholder]
+Placeholder for the definition; auto-generated from JSON above.
+
+Use this method to show test results for a build with a specified `build_id`.
+
+By default only failed tests are shown. Use the `showFailed` and `showPassing` options to control the display of failed and passing tests in the response.
+
+[NOTE]
+======
+**Looking for your API access token?**
+
+Read more about link:../README.adoc#authentication[authenticating with
+buddybuild] or show
+link:https://dashboard.buddybuild.com/account/access-token[your personal
+access token^].
+======
+
+
+{% method %}
+
+== Parameters
+
+Required = [req]`*`
+
+[.parameters.placeholder]
+Placeholder for the endpoint parameters; auto-generated from JSON above.
+
+{% sample lang="curl" %}
+
+[role=copyme]
+.curl
+[source,bash]
+curl -X GET \
+  -H 'Authorization: Bearer :api-access-token:' \
+  '\https://api.buddybuild.com/v1/builds/:build_id:/tests?showFailed=true&showPassing=true'
+
+{% sample lang="jquery" %}
+
+[role=copyme]
+.jquery
+[source,js]
+----
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "\https:////api.buddybuild.com/v1/builds/:build_id:/tests?lshowFailed=true&showPassing=true",
+  "method": "GET",
+  "headers": {
+    "authorization": "Bearer :api-access-token:"
+  }
+}
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+----
+
+{% common %}
+
+.Response
+[source,json]
+{
+  "build_id": "58b899061baced0100616172",
+  "tests": [
+    {
+      "run": "iPhone 6s",
+      "target": "MyAppTests",
+      "suite": "AuthTests",
+      "name": "testLogin()",
+      "status": "failed"
+    },
+    {
+      "run": "iPhone 7",
+      "target": "MyAppTests",
+      "suite": "AuthTests",
+      "name": "testSignUp()",
+      "status": "failed"
+    }
+  ]
+}
+
+{% endmethod %}

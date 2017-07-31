@@ -1,0 +1,152 @@
+= buddybuild REST API documentation
+
+== Overview
+
+The buddybuild API is a RESTful interface, providing programmatic access
+to much of the data in the system. It provides predictable URLs for
+accessing resources, and uses built-in HTTP features to receive commands
+and return responses. This makes it easy to communicate with from a wide
+variety of environments, from command-line utilities to client libraries
+to apps.
+
+The API accepts JSON or form-encoded content in requests and returns
+JSON content in all of its responses, including errors. Only the UTF-8
+character encoding is supported for both requests and responses.
+
+At this time the buddybuild API responds to a single version of the API.
+All resources are available under the https://api.buddybuild.com/v1/
+base URL.
+
+[[authentication]]
+== Authentication
+
+Each user in buddybuild has their own unique *Personal Access Token*,
+which can be used to talk to buddybuild on behalf of the user.
+
+[NOTE]
+======
+**Looking for your API access token?**
+
+To obtain your personal access token sign in to the buddybuild
+dashboard, hover over your profile icon and select *My Profile*, then
+select *Access Token* in the left menu. Or visit this direct link to
+link:https://dashboard.buddybuild.com/account/access-token[your personal
+access token^]
+======
+
+{% method %}
+Personal access tokens should be used when accessing the API, passing
+them in the `Authorization` header. Remember to keep your token secret,
+treating it just like a password. It acts on your behalf when
+interacting with the API. Don’t hardcode them into your programs;
+instead opt to use them as environment variables.
+
+{% sample lang="json" %}
+.Using personal access tokens in requests
+[source,json,subs="normal"]
+curl -H "Authorization: Bearer [apitoken]_api-access-token_" \
+  '\https://api.buddybuild.com/v1/apps'
+
+{% endmethod %}
+
+== Percent Encoding
+
+Many of the buddybuild API methods accept URL parameters that must be
+link:https://en.wikipedia.org/wiki/Percent-encoding[percent encoded] to
+avoid conflicts with reserved characters. Reserved characters are those
+characters that sometimes have special meaning in a URL.
+
+For example, when passing a Git branch named `feature/find&replace` as a
+`branch` parameter it must be percent encoded as
+`feature%2Ffind%26replace`.
+
+== Errors
+
+Sometimes requests to the API are not successful. Failures can occur for
+a wide range of reasons. In all cases, the API returns an HTTP Status
+Code that indicates the reason for the failure, with a response body in
+JSON format containing additional information.
+
+[cols="^10a,35a,100a", options="header"]
+|===
+| Code
+| Reason
+| Description
+
+| 200
+| OK
+| If data was requested, it is included in the response body.
+
+| 400
+| Bad Request
+| This usually occurs because of a missing or malformed parameter. Check
+  the documentation and the syntax of your request and try again.
+
+| 401
+| Unauthorized
+| A valid API personal access token was not provided with the request,
+  so the API could not associate a user with the request.
+
+| 404
+| Not Found
+| Either the request method and path supplied do not specify a known
+  action in the API, or the object specified by the request does not
+  exist.
+
+| 500
+| Server Error
+| There was a problem on buddybuild’s end. Contact support.
+
+| 503
+| Service Unavailable
+| The buddybuild API server is temporarily unavailable because it is
+  overloaded or down for maintenance. Check http://status.buddybuild.com/
+  for updates or contact support.
+
+| 504
+| Gateway Time-out
+| The buddybuild API server is temporarily unavailable because it is
+  overloaded or down for maintenance. Check
+  http://status.buddybuild.com/ for updates or contact support.
+|===
+
+In the event of an error, the response body contains an `error`
+field at the top level. This error message provides more detail about
+the error that occurred, if available.
+
+=== Examples of common errors
+
+{% method %}
+==== Missing authorization header
+
+{% common %}
+.Request
+[source,bash]
+curl \https://api.buddybuild.com/v1/apps
+
+.Response
+[source,json]
+HTTP/1.1 401 Unauthorized
+{
+  "error": "No authorization token was found"
+}
+
+{% endmethod %}
+
+{% method %}
+==== Using an invalid or revoked access token
+
+{% common %}
+.Request
+[source,json]
+curl -H "Authorization: Bearer INVALID_TOKEN" \
+  '\https://api.buddybuild.com/v1/apps'
+
+.Response
+[source,json]
+HTTP/1.1 401 Unauthorized
+{
+  "error": "Invalid authorization token"
+}
+
+{% endmethod %}

@@ -1,0 +1,18 @@
+= Builds
+
+This section covers the API methods for retrieving information about
+builds, and triggering or cancelling a build:
+
+- link:get-list.adoc[List builds]
+
+- link:get-build.adoc[Show a build]
+
+- link:get-latest_build.adoc[Show the latest build]
+
+- link:get-test_results.adoc[Show test results]
+
+- link:get-coverage,adoc[Show build coverage]
+
+- link:post-trigger.adoc[Trigger a build]
+
+- link:post-cancel.adoc[Cancel a build]

@@ -1,0 +1,114 @@
+= Trigger a build
+:linkattrs:
+
+[#endpoint]
+----
+{
+  "base":     "\https://api.buddybuild.com/v1",
+  "endpoint": "/apps/:app_id:/build",
+  "method":   "post",
+  "params": {
+    "headers": [
+      {
+        "name": "Authorization",
+        "type": "Bearer :api-access-token:",
+        "req":  true,
+        "cue":  "Enter your API access token"
+      }
+    ],
+    "path":   [
+      {
+        "name": ":app_id:",
+        "type": "string",
+        "desc": 'App identifier',
+        "req":  true,
+        "cue":  'Enter an app id'
+      }
+    ],
+    "query":  [],
+    "body":   [
+      {
+        "name": "branch",
+        "type": "string",
+        "desc": "Branch name",
+        "req":  false,
+        "cue":  'Enter a branch name'
+      }
+    ]
+  },
+  "authentication": "required"
+}
+----
+
+== Definition
+
+[.definition.placeholder]
+Placeholder for the definition; auto-generated from JSON above.
+
+This API allows you to trigger a build from the tip of a branch. You can
+also pass in a specific branch name. If you don't pass in a branch name,
+buddybuild uses the default branch.
+
+Once the build is queued, the new build id is returned.
+
+[NOTE]
+======
+**Looking for your API access token?**
+
+Read more about link:../README.adoc#authentication[authenticating with
+buddybuild] or show
+link:https://dashboard.buddybuild.com/account/access-token[your personal
+access token^].
+======
+
+{% method %}
+
+== Parameters
+
+Required = [req]`*`
+
+[.parameters.placeholder]
+Placeholder for the endpoint parameters; auto-generated from JSON above.
+
+{% sample lang="curl" %}
+
+[role=copyme]
+.curl
+[source,bash]
+curl -X POST \
+  -H 'Authorization: Bearer :api-access-token:' \
+  '\https://api.buddybuild.com/v1/apps/:app_id:/build' \
+  --data-urlencode "branch=master"
+
+{% sample lang="jquery" %}
+
+[role=copyme]
+.jquery
+[source,js]
+----
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "\https://api.buddybuild.com/v1/apps/:app_id:/build",
+  "method": "POST",
+  "data": {
+    ":branch:",
+  },
+  "headers": {
+    "authorization": "Bearer :api-access-token:"
+  }
+}
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+----
+
+{% common %}
+
+.Response
+[source,json]
+{
+  "build_id": "571a68649d3b8171c5ef489f"
+}
+
+{% endmethod %}
