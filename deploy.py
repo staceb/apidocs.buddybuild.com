@@ -49,7 +49,7 @@ class Deployer:
     def deploy_pull_request(self):
         """Deploy whenever a pull request is made."""
         print('Deploying pull request: {}'.format(self._pull_request))
-        self.domain = 'http://{}-bb-docs.surge.sh'.format(self._pull_request)
+        self.domain = 'http://{}-bb-apidocs.surge.sh'.format(self._pull_request)
         self.deploy_surge()
         self._post_comment()
 

@@ -1,0 +1,16 @@
+source,apidocs
+docs/access-token-and-app-id,index.html#authentication
+docs/add-testers-to-a-deployment-group,deployment_groups/put-add_testers.html
+docs/api-developer-guide,index.html
+docs/cancel-a-build,builds/post-cancel.html
+docs/list-apps,apps/get-list.html
+docs/list-branches,apps/get-list_branches.html
+docs/list-buddybuild-ip-address-ranges,misc/get-ip_ranges.html
+docs/list-builds,apps/gt-list_branches.html
+docs/query-a-build,builds/get-build.html
+docs/query-deployment-groups,deployment_groups/get-list.html
+docs/query-the-latest-build,builds/get-latest_build.html
+docs/remove-testers-from-a-deployment-group,deployment_groups/delete-testers.html
+docs/show-code-coverage,builds/get-show_coverage.html
+docs/show-test-results,builds/get-test_results.html
+docs/trigger-a-build,builds/post-trigger.html
