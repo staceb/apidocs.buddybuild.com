@@ -13,7 +13,6 @@ book_targets := $(wildcard \
 )
 
 YARN := $(shell command -v yarn 2> /dev/null)
-GITBOOK := $(shell command -v gitbook 2> /dev/null)
 ASCIIDOCTOR := $(shell command -v asciidoctor 2> /dev/null)
 
 # The default target.
@@ -36,11 +35,8 @@ endif
 
 # GitBook setup
 setup_gitbook:
-	@echo "Checking for gitbook..."
-ifndef GITBOOK
-	$(error "gitbook required for building this documentation.")
-endif
-	gitbook install
+	@echo "gitbook install..."
+	./node_modules/.bin/gitbook install
 
 # Asciidoctor setup
 setup_asciidoctor:
@@ -65,7 +61,7 @@ _js/mustache.js:
 book: _book tidy
 
 _book: $(book_targets)
-	gitbook build
+	./node_modules/.bin/gitbook build
 
 # Remove all built artifacts.
 clean:
@@ -86,7 +82,7 @@ spell:
 # Run htmlproofer on the artifacts to catch bad images, links, etc.
 proof: clean _book tidy
 	@command -v htmlproofer >/dev/null 2>&1 || { echo >&2 "htmlproofer required for link testing."; exit 1; }
-	htmlproofer _book
+	htmlproofer --disable-external _book
 
 css:
 	cp _css/* _book/_css/
@@ -99,4 +95,4 @@ js:
 debug: _debug tidy
 
 _debug: $(book_targets)
-	gitbook build --log=debug --debug
+	./node_modules/.bin/gitbook build --log=debug --debug
