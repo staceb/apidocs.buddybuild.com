@@ -15,7 +15,7 @@ class Deployer:
         self._branch = os.environ['TRAVIS_BRANCH']
         self._github_token = os.environ['GITHUB_TOKEN']
         os.environ['AWS_SECRET_ACCESS_KEY'] # just to raise an exception if missing
-        os.environ['AWS_SECRET_KEY_ID']
+        os.environ['AWS_ACCESS_KEY_ID']
         self._bucketURI = os.environ['AWS_BUCKET_URL'] # e.g. s3://apidocs.buddybuild.com'
         self._bucketRegion = os.environ['AWS_BUCKET_REGION'] # e.g. us-west-2  
         self.domain = None
@@ -35,7 +35,7 @@ class Deployer:
             self.deploy_s3()
         else:
             branch = self._branch.replace('/', '-')
-            self.domain = 'http://{}-bb-docs.surge.sh'.format(branch)
+            self.domain = 'http://{}-bb-apidocs.surge.sh'.format(branch)
             self.deploy_surge()
 
 
@@ -49,7 +49,7 @@ class Deployer:
     def deploy_pull_request(self):
         """Deploy whenever a pull request is made."""
         print('Deploying pull request: {}'.format(self._pull_request))
-        self.domain = 'http://{}-bb-docs.surge.sh'.format(self._pull_request)
+        self.domain = 'http://{}-bb-apidocs.surge.sh'.format(self._pull_request)
         self.deploy_surge()
         self._post_comment()
 
