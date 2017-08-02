@@ -11,7 +11,7 @@ builds, and triggering or cancelling a build:
 
 - link:get-test_results.adoc[Show test results]
 
-- link:get-coverage,adoc[Show build coverage]
+- link:get-coverage.adoc[Show build coverage]
 
 - link:post-trigger.adoc[Trigger a build]
 
