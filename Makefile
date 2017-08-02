@@ -72,7 +72,7 @@ tidy:
 	rm -rf _book/_dicts _book/Gemfile _book/Gemfile.lock _book/Makefile _book/package.json _book/yarn.lock _book/npm-debug.log
 
 # 'test' the artifacts
-test: spell proof
+test: setup spell proof
 
 # Spell check the source files.
 spell:
