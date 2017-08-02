@@ -35,7 +35,7 @@ class Deployer:
             self.deploy_s3()
         else:
             branch = self._branch.replace('/', '-')
-            self.domain = 'http://{}-bb-docs.surge.sh'.format(branch)
+            self.domain = 'http://{}-bb-apidocs.surge.sh'.format(branch)
             self.deploy_surge()
 
 
