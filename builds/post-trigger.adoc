@@ -55,7 +55,7 @@ Once the build is queued, the new build id is returned.
 ======
 **Looking for your API access token?**
 
-Read more about link:../README.adoc#authentication[authenticating with
+Read more about link:../index.adoc#authentication[authenticating with
 buddybuild] or show
 link:https://dashboard.buddybuild.com/account/access-token[your personal
 access token^].
