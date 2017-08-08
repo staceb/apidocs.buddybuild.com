@@ -1,4 +1,4 @@
-. link:README.adoc[Overview]
+. link:index.adoc[Overview]
 
 . link:apps/README.adoc[Apps]
 .. link:apps/get-list.adoc[List apps]
