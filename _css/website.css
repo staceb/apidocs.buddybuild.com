@@ -759,6 +759,49 @@ h6, .markdown-section h6 {
   letter-spacing: 0;
 }
 
+/* tooltips ------------------------------------------------------- */
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tip {
+  position: absolute;
+  width: 200px;
+  height: 30px;
+  padding: 8px;
+  border: 0 none;
+  border-radius: 6px;
+  background: #000;
+  color: white;
+  font-size: 14px;
+  line-height: 1;
+  text-transform: initial;
+  text-align: center;
+  visibility: hidden;
+}
+
+.tooltip .tip:after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -8px;
+  width: 0;
+  height: 0;
+  border-bottom: 8px solid #000;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+
+.tooltip:hover .tip {
+  visibility: visible;
+  top: 56px;
+  left: 50%;
+  margin-left: -100px;
+  z-index: 999;
+}
+
 /* search --------------------------------------------------------- */
 
 #book-search-input {
@@ -1218,8 +1261,8 @@ th.valign-bottom {
   vertical-align: bottom;
 }
 
-td *:last-child,
-th *:last-child {
+td > *:last-child,
+th > *:last-child {
   margin-bottom: 0;
 }
 
@@ -1417,7 +1460,7 @@ span.default:after {
   display: none;
 }
 
-.admonitionblock td.content :last-child,
+.admonitionblock td.content > :last-child,
 .admonitionblock td.content .paragraph:last-child p {
   margin-bottom: 0;
 }
