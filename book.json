@@ -12,7 +12,8 @@
     "-sharing",
     "search@2.2.1",
     "explicit-url@0.0.3",
-    "theme-api@git+https://github.com/BuddyBuild/theme-api.git"
+    "theme-api@git+https://github.com/BuddyBuild/theme-api.git",
+    "edit-link@https://github.com/buddybuild-public/gitbook-plugin-edit-link.git"
   ],
   "pluginsConfig": {
     "theme-api": {
@@ -28,6 +29,13 @@
         }
       ],
       "split": true
+    },
+    "edit-link": {
+      "base": "https://github.com/buddybuild-public/apidocs.buddybuild.com/edit/master",
+      "label": "",
+      "aria": "Edit on GitHub",
+      "position": "right",
+      "cssclass": "bbedit"
     }
   }
 }
