@@ -1,17 +1,3 @@
-book_targets := $(wildcard \
-	book.json \
-	README.adoc \
-	SUMMARY.adoc \
-	*/*.adoc \
-	*/*.gif \
-	*/*.png \
-	*/*.jpg \
-	_css/* \
-	_img/* \
-	_js/* \
-	_layouts/website/* \
-)
-
 YARN := $(shell command -v yarn 2> /dev/null)
 ASCIIDOCTOR := $(shell command -v asciidoctor 2> /dev/null)
 
@@ -35,7 +21,6 @@ endif
 
 # GitBook setup
 setup_gitbook:
-	@echo "gitbook install..."
 	./node_modules/.bin/gitbook install
 
 # Asciidoctor setup
@@ -58,9 +43,9 @@ _js/mustache.js:
 	cp node_modules/mustache/mustache.min.js _js/mustache.js
 
 # Build the main artifacts.
-book: _book tidy
+book: clean _book tidy
 
-_book: $(book_targets)
+_book:
 	./node_modules/.bin/gitbook build
 
 # Remove all built artifacts.
@@ -69,20 +54,32 @@ clean:
 
 # Remove artifacts that shouldn't be published.
 tidy:
-	rm -rf _book/_dicts _book/Gemfile _book/Gemfile.lock _book/Makefile _book/package.json _book/yarn.lock _book/npm-debug.log
+	rm -rf  _book/Gemfile _book/Gemfile.lock _book/Makefile _book/package.json _book/yarn.lock _book/npm-debug.log
 
 # 'test' the artifacts
-test: setup spell proof
+test: setup spell proof missed
 
 # Spell check the source files.
 spell:
 	@command -v hunspell >/dev/null 2>&1 || { echo >&2 "hunspell required for spell testing."; exit 1; }
-	find . -name "*.adoc" -exec hunspell -d _dicts/buddybuild,_dicts/en_US -l '{}' \; | sort -u
+	@command -v node_modules/gitbook-plugin-buddybuild/scripts/spellcheck.pl >/dev/null 2>&1 || { echo >&2 "run make setup before spell testing."; exit 1; }
+	@node_modules/gitbook-plugin-buddybuild/scripts/spellcheck.pl -d . -D node_modules/gitbook-plugin-buddybuild/dictionaries
 
 # Run htmlproofer on the artifacts to catch bad images, links, etc.
-proof: clean _book tidy
+proof: all
 	@command -v htmlproofer >/dev/null 2>&1 || { echo >&2 "htmlproofer required for link testing."; exit 1; }
-	htmlproofer --disable-external _book
+	htmlproofer --url-ignore="#" --disable-external _book
+
+# Run htmlproofer, with external checks
+proofx: all
+	@command -v htmlproofer >/dev/null 2>&1 || { echo >&2 "htmlproofer required for link testing."; exit 1; }
+	htmlproofer --url-ignore="#" _book
+
+# Check for unconverted topics in output folder; means they're missing
+# from the TOC.
+missed: _book
+	@echo "Checking for topics missing from the TOC..."
+	@find _book -name '*.adoc' | grep . && exit 1 || exit 0;
 
 css:
 	cp _css/* _book/_css/
@@ -92,7 +89,7 @@ js:
 	cp -a _js _book/
 
 # Build the main artifacts with debugging output enabled.
-debug: _debug tidy
+debug: clean _debug tidy
 
-_debug: $(book_targets)
+_debug:
 	./node_modules/.bin/gitbook build --log=debug --debug

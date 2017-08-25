@@ -40,7 +40,7 @@
         "desc": "Show code coverage for each function",
         "def":  "false",
         "req":  false,
-        "cue":  'Enter "true" to show code coerage for each function'
+        "cue":  'Enter "true" to show code coverage for each function'
       }
     ],
     "body":   []
