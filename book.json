@@ -13,6 +13,7 @@
     "search@2.2.1",
     "explicit-url@0.0.3",
     "theme-api@git+https://github.com/BuddyBuild/theme-api.git",
+    "buddybuild@git+https://github.com/buddybuild-public/gitbook-plugin-buddybuild.git",
     "edit-link@https://github.com/buddybuild-public/gitbook-plugin-edit-link.git"
   ],
   "pluginsConfig": {
