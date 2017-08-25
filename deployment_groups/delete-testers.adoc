@@ -25,7 +25,7 @@
         "cue":  'Enter an app id'
       },
       {
-        "name": ":deplyoment_group_id:",
+        "name": ":deployment_group_id:",
         "type": "string",
         "desc": 'Deployment group identifier',
         "req":  true,
