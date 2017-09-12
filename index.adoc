@@ -75,7 +75,16 @@ JSON format containing additional information.
 
 | 200
 | OK
-| If data was requested, it is included in the response body.
+| Request succeeded, and the data requested is included in the response body.
+
+| 201
+| Created
+| The request to create a resource succeeded. The ID of the newly created
+  resource may be returned in the response body.
+
+| 204
+| No Content
+| Request succeeded, but no data is returned.
 
 | 400
 | Bad Request
