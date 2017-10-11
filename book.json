@@ -29,7 +29,7 @@
           "name": "Go"
         }
       ],
-      "split": true
+      "split": false
     },
     "edit-link": {
       "base": "https://github.com/buddybuild-public/apidocs.buddybuild.com/edit/master",
