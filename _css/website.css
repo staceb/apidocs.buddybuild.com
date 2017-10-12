@@ -69,6 +69,7 @@
   top: -0.4em;
   left: 0;
   letter-spacing: 0;
+  width: 4em;
 }
 
 .markdown-section .apimethod code:after {
