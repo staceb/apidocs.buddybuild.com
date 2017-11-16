@@ -96,11 +96,20 @@ $.ajax(settings).done(function (response) {
 [source,json]
 [
   {
-    "_id": "274a0fc14333e39be0aea9db",
-    "name": "The Team",
-    "branch": "master",
+    "_id": "5a03360e460f821150c5559b",
+    "branches": [
+      "IOS-12345",
+      "tag:feature-release-3"
+    ],
+    "name": "Test Team",
+    "prefixes": [
+      {
+        "name": "myprefix"
+      }
+    ],
     "testers": [
-      "\peter@buddybuild.com"
+      "jeff@buddybuild.com",
+      "k@buddybuild.com"
     ]
   }
 ]
